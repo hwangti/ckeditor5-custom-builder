@@ -1,4 +1,12 @@
-import {ClassicEditor} from '@ckeditor/ckeditor5-editor-classic/dist/index';
+import { Alignment } from '@ckeditor/ckeditor5-alignment/dist/index';
+import '@ckeditor/ckeditor5-alignment/dist/index.css';
+
+import { Autosave } from '@ckeditor/ckeditor5-autosave/dist/index';
+import '@ckeditor/ckeditor5-autosave/dist/index.css';
+
+import { Bold, Italic, Strikethrough, Underline } from '@ckeditor/ckeditor5-basic-styles/dist/index';
+import '@ckeditor/ckeditor5-basic-styles/dist/index.css';
+import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic/dist/index';
 
 // Import the core styles.
 import '@ckeditor/ckeditor5-theme-lark/dist/index.css';
@@ -16,9 +24,17 @@ import '@ckeditor/ckeditor5-utils/dist/index.css';
 import '@ckeditor/ckeditor5-watchdog/dist/index.css';
 import '@ckeditor/ckeditor5-widget/dist/index.css';
 
-import {AccessibilityHelp, BalloonToolbar} from '@ckeditor/ckeditor5-ui/dist/index';
-import {Alignment} from '@ckeditor/ckeditor5-alignment/dist/index';
-import '@ckeditor/ckeditor5-alignment/dist/index.css';
+import { Essentials } from '@ckeditor/ckeditor5-essentials/dist/index';
+import '@ckeditor/ckeditor5-essentials/dist/index.css';
+
+import { FindAndReplace } from '@ckeditor/ckeditor5-find-and-replace/dist/index';
+import '@ckeditor/ckeditor5-find-and-replace/dist/index.css';
+
+import { FontBackgroundColor, FontColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font/dist/index';
+import '@ckeditor/ckeditor5-font/dist/index.css';
+
+import { GeneralHtmlSupport } from '@ckeditor/ckeditor5-html-support/dist/index';
+import '@ckeditor/ckeditor5-html-support/dist/index.css';
 
 import {
   AutoImage,
@@ -34,43 +50,24 @@ import {
 } from '@ckeditor/ckeditor5-image/dist/index';
 import '@ckeditor/ckeditor5-image/dist/index.css';
 
-import {AutoLink, Link, LinkImage} from '@ckeditor/ckeditor5-link/dist/index';
-import '@ckeditor/ckeditor5-link/dist/index.css';
-
-import {Autosave} from '@ckeditor/ckeditor5-autosave/dist/index';
-import '@ckeditor/ckeditor5-autosave/dist/index.css';
-
-import {Bold, Italic, Strikethrough, Underline} from '@ckeditor/ckeditor5-basic-styles/dist/index';
-import '@ckeditor/ckeditor5-basic-styles/dist/index.css';
-
-import {Essentials} from '@ckeditor/ckeditor5-essentials/dist/index';
-import '@ckeditor/ckeditor5-essentials/dist/index.css';
-
-import {FindAndReplace} from '@ckeditor/ckeditor5-find-and-replace/dist/index';
-import '@ckeditor/ckeditor5-find-and-replace/dist/index.css';
-
-import {FontBackgroundColor, FontColor, FontFamily, FontSize} from '@ckeditor/ckeditor5-font/dist/index';
-import '@ckeditor/ckeditor5-font/dist/index.css';
-
-import {GeneralHtmlSupport} from '@ckeditor/ckeditor5-html-support/dist/index';
-import '@ckeditor/ckeditor5-html-support/dist/index.css';
-
-import {Indent, IndentBlock} from '@ckeditor/ckeditor5-indent/dist/index';
+import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent/dist/index';
 import '@ckeditor/ckeditor5-indent/dist/index.css';
 
-import {List} from '@ckeditor/ckeditor5-list/dist/index';
+import { AutoLink, Link, LinkImage } from '@ckeditor/ckeditor5-link/dist/index';
+import '@ckeditor/ckeditor5-link/dist/index.css';
+
+import { List } from '@ckeditor/ckeditor5-list/dist/index';
 import '@ckeditor/ckeditor5-list/dist/index.css';
 
-import {MediaEmbed} from '@ckeditor/ckeditor5-media-embed/dist/index';
+import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed/dist/index';
 import '@ckeditor/ckeditor5-media-embed/dist/index.css';
 
-import {Paragraph} from '@ckeditor/ckeditor5-paragraph/dist/index';
-import {PasteFromOffice} from '@ckeditor/ckeditor5-paste-from-office/dist/index';
+import { Paragraph } from '@ckeditor/ckeditor5-paragraph/dist/index';
+import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office/dist/index';
 import '@ckeditor/ckeditor5-paste-from-office/dist/index.css';
 
-import {SelectAll} from '@ckeditor/ckeditor5-select-all/dist/index';
-import {SimpleUploadAdapter} from '@ckeditor/ckeditor5-upload/dist/index';
-import {SourceEditing} from '@ckeditor/ckeditor5-source-editing/dist/index';
+import { SelectAll } from '@ckeditor/ckeditor5-select-all/dist/index';
+import { SourceEditing } from '@ckeditor/ckeditor5-source-editing/dist/index';
 import '@ckeditor/ckeditor5-source-editing/dist/index.css';
 
 import {
@@ -83,11 +80,15 @@ import {
 } from '@ckeditor/ckeditor5-table/dist/index';
 import '@ckeditor/ckeditor5-table/dist/index.css';
 
-import {Undo} from '@ckeditor/ckeditor5-undo/dist/index';
+import { AccessibilityHelp, BalloonToolbar } from '@ckeditor/ckeditor5-ui/dist/index';
+
+import { Undo } from '@ckeditor/ckeditor5-undo/dist/index';
+import { SimpleUploadAdapter } from '@ckeditor/ckeditor5-upload/dist/index';
 // noinspection NpmUsedModulesInstalled
 import translations from 'ckeditor5/translations/ko';
 
 const editorConfig = {
+  licenseKey: 'GPL',
   toolbar: {
     items: [
       'undo',
@@ -169,6 +170,32 @@ const editorConfig = {
   ],
   balloonToolbar: ['bold', 'italic', '|', 'link', 'insertImage', '|', 'bulletedList', 'numberedList'],
   mediaEmbed: {
+    providers: [
+      {
+        name: 'youtube',
+        url: [
+          /^(?:m\.)?youtube\.com\/watch\?v=([\w-]+)(?:&t=(\d+))?/,
+          /^(?:m\.)?youtube\.com\/shorts\/([\w-]+)(?:\?t=(\d+))?/,
+          /^(?:m\.)?youtube\.com\/v\/([\w-]+)(?:\?t=(\d+))?/,
+          /^youtube\.com\/embed\/([\w-]+)(?:\?start=(\d+))?/,
+          /^youtu\.be\/([\w-]+)(?:\?t=(\d+))?/
+        ],
+        html: match => {
+          const id = match[ 1 ];
+          const time = match[ 2 ];
+
+          return (
+              '<div style="position: relative; height: 0; padding-bottom: 56.2493%;">' +
+                `<iframe src="https://www.youtube.com/embed/${id}${time ? `?start=${time}` : ''}"` +
+                  'title="YouTube video player" ' +
+                  'style="position: absolute; width: 100%; height: 100%; top: 0; left: 0" frameborder="0" ' +
+                  'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+                  'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>' +
+              '</div>'
+          );
+        }
+      },
+    ],
     previewsInData: true
   },
   fontFamily: {
@@ -218,7 +245,7 @@ const editorConfig = {
     }
   },
   table: {
-    contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
+    contentToolbar: ['toggleTableCaption', 'tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties']
   },
   translations: [translations]
 };
@@ -258,7 +285,7 @@ class WebbizzUploadAdapter {
       if (!response || response.status !== 200)
         return reject(response.message ? response.message : genericErrorText);
 
-      resolve({ default: `/api/v1/attachment/${response.data[0].uuid}` })
+      resolve({ default: `/api/v1/attachment/${response.data[0].uuid}`, alt: file.name })
     });
 
     if (xhr.upload) {
@@ -283,6 +310,12 @@ function WebbizzUploadAdapterPlugin(editor) {
   editor.plugins.get('FileRepository').createUploadAdapter = loader => {
     return new WebbizzUploadAdapter(loader);
   }
+  editor.plugins.get('ImageUploadEditing').on('uploadComplete', (evt, { data, imageElement }) => {
+    editor.model.change(writer => writer.setAttribute('alt', data.alt, imageElement));
+  });
+  editor.plugins.get('MediaEmbedElementSupport').on('change:isEnabled', (eventInfo, name, value, oldValue) => {
+    console.log(eventInfo, name, value, oldValue);
+  });
 }
 
 window.ClassicEditor = ClassicEditor;
